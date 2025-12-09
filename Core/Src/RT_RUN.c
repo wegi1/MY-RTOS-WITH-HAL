@@ -8,13 +8,11 @@
 #include "MY_RTOS.h"
 #include "stm32f4xx_hal.h"
 //=====================================================================================================================
-extern void iddle_task(void);
 extern uint32_t my_utoa(uint8_t * buf, uint32_t data);
 extern uint32_t my_itoa(uint8_t * buf, uint32_t data);
 extern void my_htoa32(uint8_t * buf, uint32_t data);
 extern void my_htoa64(uint8_t * buf, uint64_t data);
 extern void set_LF(uint32_t * buff_ad);
-extern uint8_t idx[];
 //---
 uint8_t idx[20];
 

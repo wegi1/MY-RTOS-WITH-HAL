@@ -168,7 +168,7 @@ typedef struct  {
 #define TASK14_PSP          (uint32_t) (TASK13_PSP - TASK13_STACK_SIZE)
 #define TASK15_PSP          (uint32_t) (TASK14_PSP - TASK14_STACK_SIZE)
 
-#define MSP_STACK           (uint32_t) (TASK7_PSP - TASK7_STACK_SIZE) // NEED TO CHANGE TO LAST ONE TASK
+#define MSP_STACK           (uint32_t) (TASK15_PSP - TASK15_STACK_SIZE) // NEED TO CHANGE TO LAST ONE TASK
 //---
 #define DUMMY_XPSR 			0x01000000U // THUMB STATE for Cortex-M
 //---
