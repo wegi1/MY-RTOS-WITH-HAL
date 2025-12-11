@@ -129,7 +129,7 @@ bool put_Queue1_task(uint32_t addrs) {
 uint32_t handle_Queue1(void) {
 
 //---
-	uint32_t * pUART2_Base     = (uint32_t *)0x40004400;
+	volatile uint32_t * pUART2_Base     = (volatile uint32_t *)0x40004400;
 //---
 
 
@@ -161,9 +161,7 @@ uint32_t handle_Queue1(void) {
 	my_utoa(&idx5[0], many_task);
 	// print " Queue: " text
     while(inf4[ctrl] != 0){
-    	while((pUART2_Base[0] & (1 << 6))== 0){
-    		__asm volatile("NOP"); // need beware idiot compiler in "Os" optimization remove all while loop
-    	}
+    	while((pUART2_Base[0] & (1 << 6))== 0){;}
     	pUART2_Base[1] = inf4[ctrl];
     	ctrl++;
     }
@@ -171,23 +169,17 @@ uint32_t handle_Queue1(void) {
     ctrl = 0;
     // print many_task decimal value
     while(idx5[ctrl] != 0){
-    	while((pUART2_Base[0] & (1 << 6))== 0){
-    		__asm volatile("NOP"); // need beware idiot compiler in "Os" optimization remove all while loop
-    	}
+    	while((pUART2_Base[0] & (1 << 6))== 0){;}
     	pUART2_Base[1] = idx5[ctrl];
     	ctrl++;
     }
-	while((pUART2_Base[0] & (1 << 6))== 0){
-		__asm volatile("NOP"); // need beware idiot compiler in "Os" optimization remove all while loop
-	}
+	while((pUART2_Base[0] & (1 << 6))== 0){ ; }
 	pUART2_Base[1] = 0x20;
 
 	ctrl = 0;
 	// print " Ticks: " text
     while(inf3[ctrl] != 0){
-    	while((pUART2_Base[0] & (1 << 6))== 0){
-    		__asm volatile("NOP"); // need beware idiot compiler in "Os" optimization remove all while loop
-    	}
+    	while((pUART2_Base[0] & (1 << 6))== 0){ ; }
     	pUART2_Base[1] = inf3[ctrl];
     	ctrl++;
     }
@@ -197,15 +189,11 @@ uint32_t handle_Queue1(void) {
 //    my_htoa32(&idx4[0], pUART2_Base[2]); // convert BRR to hex value
     // print tck_cnt decimal value
     while(idx4[ctrl] != 0){
-    	while((pUART2_Base[0] & (1 << 6))== 0){
-    		__asm volatile("NOP"); // need beware idiot compiler in "Os" optimization remove all while loop
-    	}
+    	while((pUART2_Base[0] & (1 << 6))== 0){ ; }
     	pUART2_Base[1] = idx4[ctrl];
     	ctrl++;
     }
-	while((pUART2_Base[0] & (1 << 6))== 0){
-		__asm volatile("NOP"); // need beware idiot compiler in "Os" optimization remove all while loop
-	}
+	while((pUART2_Base[0] & (1 << 6))== 0){ ; }
 	pUART2_Base[1] = 0x20;
 #endif
 //===================================================================================================================================
@@ -222,8 +210,7 @@ uint32_t handle_Queue1(void) {
 	uint32_t i = 0;
 
     while(pAddrs[i] != 0) {
-    	while((pUART2_Base[0] & (1 << 6))== 0){
-    		__asm volatile("NOP"); // need beware idiot compiler in "Os" optimization remove all while loop
+    	while((pUART2_Base[0] & (1 << 6))== 0){ ;
 //    		OS_schedule(); // switch the context instead wait for complete transmition
     	}
     	pUART2_Base[1] = pAddrs[i];
